@@ -1,0 +1,20 @@
+IMÁGENES DE: Inventario para Mipymes
+====================================
+
+Coloca aquí los archivos con EXACTAMENTE estos nombres. Luego, en
+app/servicios/inventario-digital/page.tsx, quita el "// " de la línea imgSrc
+correspondiente para activarla.
+
+ARCHIVO              SECCIÓN       QUÉ MOSTRAR
+-------------------  ------------  -------------------------------------------
+hero.gif             Hero          Panel de inventario en acción
+problema.png         El problema   Libreta y Excel vs. sistema digital
+solucion.gif         La solución   Registro de entradas y salidas
+beneficio-1.png      Beneficio 1   Reporte de productos más vendidos
+beneficio-2.png      Beneficio 2   Búsqueda instantánea de productos
+autoridad.jpg        Autoridad     El sistema en un comercio real
+
+Formatos: .gif / .png / .jpg. Respeta el nombre base.
+Tamaño recomendado: 1600x900 px (hero) y 1200x900 px (resto).
+
+Si no colocas la imagen, la web muestra un recuadro con la etiqueta. No se rompe nada.

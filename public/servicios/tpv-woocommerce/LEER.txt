@@ -1,0 +1,20 @@
+IMÁGENES DE: TPV para WooCommerce
+=================================
+
+Coloca aquí los archivos con EXACTAMENTE estos nombres. Luego, en
+app/servicios/tpv-woocommerce/page.tsx, quita el "// " de la línea imgSrc
+correspondiente para activarla.
+
+ARCHIVO              SECCIÓN       QUÉ MOSTRAR
+-------------------  ------------  -------------------------------------------
+hero.gif             Hero          El TPV registrando una venta
+problema.png         El problema   Apuntes manuales desordenados
+solucion.gif         La solución   Venta sincronizada con el inventario
+beneficio-1.png      Beneficio 1   Resumen de cierre del día
+beneficio-2.png      Beneficio 2   Stock actualizándose en tiempo real
+autoridad.jpg        Autoridad     El TPV en un comercio real
+
+Formatos: .gif / .png / .jpg. Respeta el nombre base.
+Tamaño recomendado: 1600x900 px (hero) y 1200x900 px (resto).
+
+Si no colocas la imagen, la web muestra un recuadro con la etiqueta. No se rompe nada.

@@ -1,0 +1,21 @@
+IMÁGENES DE: WhatsApp Automatizado
+==================================
+
+Coloca aquí los archivos con EXACTAMENTE estos nombres. Luego, en
+app/servicios/whatsapp-ia/page.tsx, quita el "// " de la línea imgSrc
+correspondiente para activarla.
+
+ARCHIVO              SECCIÓN       QUÉ MOSTRAR
+-------------------  ------------  -------------------------------------------
+hero.gif             Hero          Conversación automatizada en WhatsApp
+problema.png         El problema   Mensajes sin responder acumulados
+solucion.gif         La solución   El sistema respondiendo en tiempo real
+beneficio-1.png      Beneficio 1   Flujo de pregunta a venta
+beneficio-2.png      Beneficio 2   Preguntas frecuentes automatizadas
+beneficio-3.png      Beneficio 3   Experiencia del cliente
+autoridad.jpg        Autoridad     Distintos tipos de negocio usándolo
+
+Formatos: .gif / .png / .jpg. Respeta el nombre base.
+Tamaño recomendado: 1600x900 px (hero) y 1200x900 px (resto).
+
+Si no colocas la imagen, la web muestra un recuadro con la etiqueta. No se rompe nada.

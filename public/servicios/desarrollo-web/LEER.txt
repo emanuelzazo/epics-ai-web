@@ -1,0 +1,20 @@
+IMÁGENES DE: Desarrollo Web Profesional
+=======================================
+
+Coloca aquí los archivos con EXACTAMENTE estos nombres. Luego, en
+app/servicios/desarrollo-web/page.tsx, quita el "// " de la línea imgSrc
+correspondiente para activarla.
+
+ARCHIVO              SECCIÓN       QUÉ MOSTRAR
+-------------------  ------------  -------------------------------------------
+hero.gif             Hero          Sitio web terminado, vista desktop
+problema.png         El problema   Web antigua vs. web moderna
+solucion.gif         La solución   La web en móvil y desktop
+beneficio-1.png      Beneficio 1   Resultados en Google / analítica
+beneficio-2.png      Beneficio 2   Diseño premium en pantalla
+autoridad.jpg        Autoridad     Proceso de diseño y entrega
+
+Formatos: .gif / .png / .jpg. Respeta el nombre base.
+Tamaño recomendado: 1600x900 px (hero) y 1200x900 px (resto).
+
+Si no colocas la imagen, la web muestra un recuadro con la etiqueta. No se rompe nada.

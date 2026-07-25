@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="EPICS AI ayuda a empresas cubanas a vender más mediante IA, automatización de WhatsApp, inventario digital y desarrollo web para MIPYMES y TCP.">
+  <title>EPICS AI — Tecnología Inteligente para Empresas Inteligentes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    /* ===== RESET ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html {
+      scroll-behavior: smooth;
+      overflow-x: clip;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    body { background: #fff; color: #111; overflow-x: clip; }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: inherit; }
+
+    /* ===== TOKENS ===== */
+    :root {
+      --black: #000;
+      --off-black: #111;
+      --dark: #222;
+      --mid: #555;
+      --muted: #888;
+      --light: #e5e5e5;
+      --lighter: #f5f5f5;
+      --white: #fff;
+      --nav-h: 72px;
+      --ease: cubic-bezier(.25,.46,.45,.94);
+    }
+
+    /* ===== CONTAINER ===== */
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 2rem; }
+
+    /* ===== TYPOGRAPHY ===== */
+    .label {
+      font-size: .75rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .section-title {
+      font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900;
+      line-height: 1.04; letter-spacing: -.035em; text-wrap: balance;
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .875rem 1.75rem; border-radius: 9999px;
+      font-size: .9375rem; font-weight: 600; cursor: pointer;
+      border: 2px solid transparent; transition: all .2s var(--ease);
+      white-space: nowrap;
+    }
+    .btn-primary { background: var(--black); color: #fff; border-color: var(--black); }
+    .btn-primary:hover { background: var(--dark); transform: translateY(-1px); }
+    .btn-outline { background: transparent; color: var(--off-black); border-color: var(--dark); }
+    .btn-outline:hover { background: var(--off-black); color: #fff; transform: translateY(-1px); }
+    .btn-white { background: #fff; color: var(--black); border-color: #fff; }
+    .btn-white:hover { background: #eee; transform: translateY(-1px); }
+    .btn-white-outline { background: transparent; color: #fff; border-color: rgba(255,255,255,.4); }
+    .btn-white-outline:hover { background: rgba(255,255,255,.1); border-color: #fff; transform: translateY(-1px); }
+
+    /* ===== NAV ===== */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: var(--nav-h); display: flex; align-items: center;
+      transition: background .3s var(--ease), box-shadow .3s var(--ease);
+    }
+    #nav.scrolled {
+      background: rgba(255,255,255,.96);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 1px 0 rgba(0,0,0,.07);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+    .nav-logo { font-size: 1.125rem; font-weight: 900; letter-spacing: -.04em; }
+    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: .875rem; font-weight: 500; color: var(--mid);
+      transition: color .15s; position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+      height: 1.5px; background: var(--off-black);
+      transform: scaleX(0); transform-origin: left; transition: transform .2s var(--ease);
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--off-black); }
+    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+    .nav-cta .btn { padding: .625rem 1.25rem; font-size: .875rem; }
+
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 8px; background: none; border: none;
+    }
+    .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--off-black); transition: all .3s var(--ease); transform-origin: center; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .nav-mobile {
+      display: none; position: fixed; top: var(--nav-h); left: 0; right: 0;
+      background: rgba(255,255,255,.98); backdrop-filter: blur(20px);
+      padding: 1.5rem 2rem 2rem; flex-direction: column; gap: 0;
+      border-top: 1px solid var(--light); z-index: 99;
+    }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a {
+      font-size: 1.0625rem; font-weight: 600; color: var(--off-black);
+      padding: 1rem 0; border-bottom: 1px solid var(--light);
+    }
+    .nav-mobile .btn { margin-top: 1.25rem; justify-content: center; border-radius: 9999px; }
+
+    /* ===== HERO ===== */
+    #hero {
+      position: relative; min-height: 100vh; min-height: 100svh;
+      display: flex; align-items: center;
+      padding-top: var(--nav-h); overflow: hidden;
+    }
+    #hero-canvas {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 2; padding: 5rem 0 4rem; max-width: 760px; }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: .625rem;
+      font-size: .75rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 2rem;
+      animation: fadeUp .6s var(--ease) .1s both;
+    }
+    .hero-eyebrow::before { content: ''; display: block; width: 20px; height: 1px; background: var(--muted); }
+    .hero-title {
+      font-size: clamp(2.5rem, 6.5vw, 5rem); font-weight: 900;
+      line-height: 1.02; letter-spacing: -.04em; text-wrap: balance;
+      margin-bottom: 1.5rem; color: var(--off-black);
+      animation: fadeUp .8s var(--ease) .2s both;
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.1875rem); color: var(--mid);
+      line-height: 1.7; max-width: 540px; margin-bottom: 2.5rem;
+      animation: fadeUp .8s var(--ease) .35s both;
+    }
+    .hero-checklist { list-style: none; margin-bottom: 3rem; display: flex; flex-direction: column; gap: .75rem; }
+    .hero-checklist li {
+      display: flex; align-items: center; gap: .75rem;
+      font-size: .9375rem; font-weight: 500; color: var(--dark);
+      opacity: 0; transform: translateX(-10px); transition: opacity .4s var(--ease), transform .4s var(--ease);
+    }
+    .hero-checklist li.show { opacity: 1; transform: none; }
+    .hero-checklist li::before {
+      content: ''; display: block; width: 18px; height: 18px; min-width: 18px;
+      border-radius: 50%; background: var(--black);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+      background-size: 11px; background-position: center; background-repeat: no-repeat;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp .8s var(--ease) .9s both; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    /* ===== STATS ===== */
+    #stats { background: var(--off-black); padding: 5rem 0; }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .stat-item { padding: 2rem 1.5rem; border-right: 1px solid rgba(255,255,255,.1); text-align: center; }
+    .stat-item:last-child { border-right: none; }
+    .stat-number {
+      display: block; font-size: clamp(2.25rem, 4vw, 3.25rem); font-weight: 900;
+      letter-spacing: -.04em; color: #fff; line-height: 1; margin-bottom: .5rem;
+    }
+    .stat-label { font-size: .875rem; color: rgba(255,255,255,.4); line-height: 1.5; }
+
+    /* ===== SECTION BASE ===== */
+    .section { padding: 7rem 0; }
+    .section-header { margin-bottom: 4rem; }
+    .section-header .label { display: block; margin-bottom: 1rem; }
+
+    /* ===== PROBLEMS ===== */
+    #problemas { background: var(--lighter); }
+    .problems-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 1.5px; background: var(--light);
+      border: 1.5px solid var(--light); border-radius: 16px; overflow: hidden;
+    }
+    .problem-card {
+      background: #fff; padding: 2.5rem;
+      transition: background .2s var(--ease);
+    }
+    .problem-card:hover { background: var(--off-black); }
+    .problem-card:hover .problem-icon,
+    .problem-card:hover .problem-title,
+    .problem-card:hover .problem-desc { color: #fff; }
+    .problem-icon { font-size: 1.5rem; display: block; margin-bottom: 1.25rem; transition: color .2s; }
+    .problem-title { font-size: 1.125rem; font-weight: 700; margin-bottom: .75rem; transition: color .2s; }
+    .problem-desc { font-size: .9375rem; color: var(--mid); line-height: 1.65; transition: color .2s; }
+
+    /* ===== PRODUCTS ===== */
+    #productos { background: #fff; }
+    .products-tabs {
+      display: flex; border-bottom: 1px solid var(--light);
+      margin-bottom: 3.5rem; overflow-x: auto; scrollbar-width: none;
+    }
+    .products-tabs::-webkit-scrollbar { display: none; }
+    .tab-btn {
+      padding: 1rem 1.5rem; font-size: .875rem; font-weight: 600;
+      color: var(--muted); background: none; border: none; cursor: pointer;
+      border-bottom: 2px solid transparent; margin-bottom: -1px;
+      white-space: nowrap; transition: color .15s, border-color .15s;
+    }
+    .tab-btn:hover { color: var(--off-black); }
+    .tab-btn.active { color: var(--off-black); border-bottom-color: var(--off-black); }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+
+    .product-badge {
+      display: inline-block; padding: .25rem .75rem;
+      background: var(--off-black); color: #fff;
+      font-size: .6875rem; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; border-radius: 9999px; margin-bottom: 1.25rem;
+    }
+    .product-icon { font-size: 2.25rem; display: block; margin-bottom: .875rem; }
+    .product-title {
+      font-size: clamp(1.5rem, 3vw, 2.125rem); font-weight: 900;
+      letter-spacing: -.03em; line-height: 1.1; margin-bottom: 1rem;
+    }
+    .product-desc { font-size: 1rem; color: var(--mid); line-height: 1.7; margin-bottom: 2rem; }
+    .product-features { list-style: none; display: flex; flex-direction: column; gap: .625rem; }
+    .product-features li { display: flex; gap: .625rem; font-size: .9375rem; color: var(--dark); }
+    .product-features li::before { content: '—'; color: var(--muted); flex-shrink: 0; }
+
+    .product-visual {
+      background: var(--lighter); border-radius: 20px;
+      aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 1rem; overflow: hidden; position: relative;
+    }
+    .pv-lines { display: flex; flex-direction: column; gap: .625rem; width: 70%; }
+    .pv-line { height: 8px; background: var(--light); border-radius: 9999px; }
+    .pv-line.dark { background: var(--off-black); }
+    .pv-line.mid { background: #bbb; }
+    .pv-dots { display: flex; gap: .5rem; }
+    .pv-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--off-black); }
+    .pv-dot:nth-child(2) { background: #ccc; }
+    .pv-dot:nth-child(3) { background: #eee; }
+
+    /* ===== PROCESS ===== */
+    #proceso { background: var(--off-black); }
+    #proceso .section-title, #proceso .label { color: rgba(255,255,255,.3); }
+    #proceso .section-title { color: #fff; }
+    .process-steps {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      position: relative; gap: 0;
+    }
+    .process-steps::before {
+      content: ''; position: absolute; top: 15px;
+      left: calc(12.5% + 16px); right: calc(12.5% + 16px);
+      height: 1px; background: rgba(255,255,255,.12);
+    }
+    .step { padding: 0 2rem 0 0; }
+    .step-num {
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.25);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .75rem; font-weight: 700; color: rgba(255,255,255,.4);
+      margin-bottom: 1.5rem; background: var(--off-black); position: relative; z-index: 1;
+      transition: all .3s var(--ease);
+    }
+    .step:hover .step-num { background: #fff; color: var(--off-black); border-color: #fff; }
+    .step-title { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: .625rem; }
+    .step-desc { font-size: .9rem; color: rgba(255,255,255,.45); line-height: 1.65; }
+
+    /* ===== SECTORS ===== */
+    #sectores { background: #fff; }
+    .sectors-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--light);
+      border: 1px solid var(--light); border-radius: 16px; overflow: hidden;
+    }
+    .sector-item {
+      background: #fff; padding: 2rem 1.5rem;
+      display: flex; flex-direction: column; align-items: center; gap: .625rem;
+      text-align: center; transition: background .2s;
+    }
+    .sector-item:hover { background: var(--off-black); }
+    .sector-item:hover .sector-name { color: #fff; }
+    .sector-emoji { font-size: 1.75rem; }
+    .sector-name { font-size: .9rem; font-weight: 600; color: var(--dark); transition: color .2s; }
+
+    /* ===== ABOUT ===== */
+    #nosotros { background: var(--lighter); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+    .about-desc { font-size: 1.0625rem; color: var(--mid); line-height: 1.75; margin-bottom: 2.5rem; }
+    .about-callouts { display: flex; flex-direction: column; gap: 1.25rem; }
+    .callout { padding: 1.375rem 1.5rem; border-left: 3px solid var(--off-black); background: #fff; }
+    .callout-title { font-size: .6875rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: .375rem; }
+    .callout-text { font-size: .9375rem; color: var(--dark); line-height: 1.6; }
+
+    .about-visual { position: sticky; top: calc(var(--nav-h) + 2rem); }
+    .about-art {
+      background: var(--off-black); border-radius: 20px;
+      aspect-ratio: 4/5; overflow: hidden; position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .about-art-bg {
+      position: absolute; inset: 0;
+      background-image: repeating-linear-gradient(0deg, rgba(255,255,255,.03) 0px, rgba(255,255,255,.03) 1px, transparent 1px, transparent 48px),
+                        repeating-linear-gradient(90deg, rgba(255,255,255,.03) 0px, rgba(255,255,255,.03) 1px, transparent 1px, transparent 48px);
+    }
+    .about-art-text {
+      font-size: 7rem; font-weight: 900; letter-spacing: -.07em;
+      color: rgba(255,255,255,.12); position: relative; z-index: 1; user-select: none;
+      animation: breathe 4s ease-in-out infinite;
+    }
+    @keyframes breathe {
+      0%, 100% { opacity: .12; }
+      50% { opacity: .22; }
+    }
+
+    /* ===== CEO ===== */
+    #ceo { background: #fff; }
+    .ceo-card {
+      max-width: 700px; margin: 0 auto;
+      background: #fff; border: 1px solid var(--light);
+      border-radius: 24px; padding: 3rem;
+    }
+    .ceo-header { display: flex; align-items: center; gap: 1.75rem; margin-bottom: 1.75rem; padding-bottom: 1.75rem; border-bottom: 1px solid var(--light); }
+    .ceo-avatar {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: var(--off-black); display: flex; align-items: center; justify-content: center;
+      font-size: 1.375rem; font-weight: 900; color: #fff; flex-shrink: 0; letter-spacing: -.04em;
+    }
+    .ceo-name { font-size: 1.3125rem; font-weight: 800; letter-spacing: -.02em; margin-bottom: .25rem; }
+    .ceo-role { font-size: .875rem; color: var(--muted); line-height: 1.5; }
+    .ceo-bio { font-size: .9375rem; color: var(--mid); line-height: 1.75; margin-bottom: 1.75rem; }
+    .ceo-certs { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.5rem; }
+    .cert-tag {
+      padding: .3125rem .875rem; background: var(--lighter);
+      border: 1px solid var(--light); border-radius: 9999px;
+      font-size: .8125rem; font-weight: 500; color: var(--dark);
+    }
+    .ceo-skills { font-size: .875rem; color: var(--muted); line-height: 2; }
+
+    /* ===== TESTIMONIALS ===== */
+    #testimonios { background: var(--lighter); }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+    .testimonial-card {
+      padding: 2rem; background: #fff;
+      border: 1px solid var(--light); border-radius: 16px;
+      transition: border-color .2s, box-shadow .2s, transform .2s var(--ease);
+    }
+    .testimonial-card:hover { border-color: var(--dark); box-shadow: 0 8px 32px rgba(0,0,0,.07); transform: translateY(-3px); }
+    .stars { font-size: .875rem; letter-spacing: .05em; margin-bottom: 1rem; }
+    .testimonial-quote { font-size: .9375rem; color: var(--dark); line-height: 1.7; margin-bottom: 1.5rem; font-style: italic; }
+    .author-name { font-size: .875rem; font-weight: 700; }
+    .author-role { font-size: .8125rem; color: var(--muted); margin-top: .2rem; }
+
+    /* ===== CTA FINAL ===== */
+    #cta-final { background: var(--off-black); padding: 9rem 0; text-align: center; }
+    .cta-label { color: rgba(255,255,255,.3); margin-bottom: 1.5rem; display: block; }
+    .cta-title { color: #fff; margin-bottom: 1.25rem; }
+    .cta-sub { font-size: 1.0625rem; color: rgba(255,255,255,.5); max-width: 480px; margin: 0 auto 1rem; line-height: 1.65; }
+    .cta-call { font-size: .9375rem; color: rgba(255,255,255,.35); max-width: 440px; margin: 0 auto 3rem; }
+    .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ===== FOOTER ===== */
+    footer { background: var(--black); padding: 2.25rem 0; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; }
+    .footer-logo { font-size: 1rem; font-weight: 900; letter-spacing: -.04em; color: #fff; }
+    .footer-tag { font-size: .8125rem; color: rgba(255,255,255,.3); }
+    .footer-copy { font-size: .8125rem; color: rgba(255,255,255,.2); }
+
+    /* ===== REVEALS ===== */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+    .reveal.in { opacity: 1; transform: none; }
+    /* Defensive: split-text guard */
+    .reveal[data-split] { opacity: 1; transform: none; }
+    .d1 { transition-delay: .1s; }
+    .d2 { transition-delay: .2s; }
+    .d3 { transition-delay: .3s; }
+    .d4 { transition-delay: .4s; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .process-steps { grid-template-columns: 1fr 1fr; gap: 3rem; }
+      .process-steps::before { display: none; }
+      .tab-panel.active { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-visual { position: static; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+      .stat-item:nth-child(3) { border-top: 1px solid rgba(255,255,255,.1); border-right: 1px solid rgba(255,255,255,.1); }
+      .stat-item:nth-child(4) { border-top: 1px solid rgba(255,255,255,.1); border-right: none; }
+    }
+    @media (max-width: 768px) {
+      :root { --nav-h: 60px; }
+      .container { padding: 0 1.25rem; }
+      .section { padding: 5rem 0; }
+      .nav-links, .nav-cta { display: none; }
+      .nav-hamburger { display: flex; }
+      .problems-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr; gap: 2.5rem; }
+      .footer-inner { flex-direction: column; gap: .625rem; text-align: center; }
+      .about-art-text { font-size: 4.5rem; }
+    }
+    @media (max-width: 480px) {
+      .hero-title { font-size: 2.125rem; }
+      .hero-actions { flex-direction: column; }
+      .hero-actions .btn { justify-content: center; }
+      .ceo-card { padding: 2rem; }
+      .ceo-header { flex-direction: column; align-items: flex-start; }
+      .sectors-grid { grid-template-columns: repeat(3, 1fr); }
+      .cta-buttons { flex-direction: column; }
+      .cta-buttons .btn { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<header id="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">EPICS AI</a>
+      <ul class="nav-links">
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#proceso">Proceso</a></li>
+        <li><a href="#sectores">Sectores</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#testimonios">Testimonios</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="#cta-final" class="btn btn-primary">Solicitar Demo</a>
+      </div>
+      <button class="nav-hamburger" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="nav-mobile" aria-label="Menú móvil">
+  <a href="#servicios">Servicios</a>
+  <a href="#proceso">Proceso</a>
+  <a href="#sectores">Sectores</a>
+  <a href="#nosotros">Nosotros</a>
+  <a href="#testimonios">Testimonios</a>
+  <a href="#cta-final" class="btn btn-primary">Solicitar Demo</a>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <div class="container">
+    <div class="hero-content">
+      <p class="hero-eyebrow">EPICS AI · Agencia de IA para Cuba</p>
+      <h1 class="hero-title">Impulsamos el crecimiento de tu negocio con Inteligencia Artificial</h1>
+      <p class="hero-sub">Automatizamos procesos, optimizamos ventas y digitalizamos operaciones para que tu empresa trabaje más rápido, venda más y tenga mayor control.</p>
+      <ul class="hero-checklist" aria-label="Lo que ofrecemos">
+        <li>Automatización de WhatsApp con IA</li>
+        <li>Gestión inteligente de inventarios</li>
+        <li>Páginas web profesionales</li>
+        <li>Sistemas para MIPYMES y TCP</li>
+        <li>Automatización de ventas en Facebook con IA</li>
+      </ul>
+      <div class="hero-actions">
+        <a href="#cta-final" class="btn btn-primary">Solicitar Demostración</a>
+        <a href="https://wa.me/53000000000" class="btn btn-outline" target="_blank" rel="noopener noreferrer">Hablar por WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STATS ===== -->
+<section id="stats" aria-label="Métricas">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <span class="stat-number" data-count="3" data-prefix="+" data-suffix=" años">+3 años</span>
+        <span class="stat-label">de experiencia</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" data-count="50" data-prefix="+" data-suffix=" proyectos">+50 proyectos</span>
+        <span class="stat-label">digitales entregados</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">24/7</span>
+        <span class="stat-label">automatización inteligente</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" data-count="100" data-suffix="%">100%</span>
+        <span class="stat-label">soluciones adaptadas a Cuba</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROBLEMS ===== -->
+<section id="servicios" class="section" style="background:var(--lighter)">
+  <div class="container">
+    <div class="section-header">
+      <span class="label">El problema</span>
+      <h2 class="section-title reveal">Tu negocio no debería<br>depender de procesos manuales</h2>
+    </div>
+    <div class="problems-grid">
+      <div class="problem-card reveal">
+        <span class="problem-icon" aria-hidden="true">📉</span>
+        <h3 class="problem-title">Ventas desorganizadas</h3>
+        <p class="problem-desc">Pierdes clientes por falta de seguimiento y no tienes visibilidad del proceso de ventas en tiempo real.</p>
+      </div>
+      <div class="problem-card reveal d1">
+        <span class="problem-icon" aria-hidden="true">📦</span>
+        <h3 class="problem-title">Inventario sin control</h3>
+        <p class="problem-desc">No sabes exactamente qué productos tienes. Vendes lo que no hay o pierdes ventas por desconocer el stock.</p>
+      </div>
+      <div class="problem-card reveal d2">
+        <span class="problem-icon" aria-hidden="true">⏱️</span>
+        <h3 class="problem-title">Atención lenta</h3>
+        <p class="problem-desc">Tus clientes esperan demasiado por una respuesta en WhatsApp o Facebook. La competencia responde en segundos.</p>
+      </div>
+      <div class="problem-card reveal d3">
+        <span class="problem-icon" aria-hidden="true">🔄</span>
+        <h3 class="problem-title">Procesos repetitivos</h3>
+        <p class="problem-desc">Tu equipo pierde horas diarias haciendo tareas que la Inteligencia Artificial puede realizar automáticamente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRODUCTS ===== -->
+<section id="productos" class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="label">Soluciones</span>
+      <h2 class="section-title reveal">Diseñadas para<br>empresas cubanas</h2>
+    </div>
+    <div class="products-tabs" role="tablist" aria-label="Productos EPICS AI">
+      <button class="tab-btn active" role="tab" aria-selected="true" data-tab="fb">FB Publisher AI</button>
+      <button class="tab-btn" role="tab" aria-selected="false" data-tab="wa">WhatsApp IA</button>
+      <button class="tab-btn" role="tab" aria-selected="false" data-tab="inv">Inventario Digital</button>
+      <button class="tab-btn" role="tab" aria-selected="false" data-tab="sys">Sistema MIPYMES</button>
+      <button class="tab-btn" role="tab" aria-selected="false" data-tab="web">Desarrollo Web</button>
+    </div>
+
+    <div class="tab-panel active" id="tab-fb" role="tabpanel">
+      <div>
+        <span class="product-badge">⭐ Más solicitado</span>
+        <span class="product-icon" aria-hidden="true">📘</span>
+        <h3 class="product-title">FB Publisher AI</h3>
+        <p class="product-desc">Automatiza la captación y gestión de clientes desde Facebook. Convierte conversaciones en ventas mientras duermes.</p>
+        <ul class="product-features">
+          <li>Publicación automática en grupos de Facebook</li>
+          <li>Gestión de cientos de conversaciones con IA</li>
+          <li>Captación de clientes las 24 horas</li>
+          <li>Organización de prospectos y seguimiento</li>
+          <li>Respuestas inteligentes personalizadas</li>
+          <li>Ideal para agencias, MIPYMES y negocios online</li>
+        </ul>
+      </div>
+      <div class="product-visual" aria-hidden="true">
+        <div class="pv-lines">
+          <div class="pv-dots"><div class="pv-dot"></div><div class="pv-dot"></div><div class="pv-dot"></div></div>
+          <div class="pv-line dark" style="width:80%"></div>
+          <div class="pv-line" style="width:100%"></div>
+          <div class="pv-line mid" style="width:65%"></div>
+          <div class="pv-line" style="width:90%"></div>
+          <div class="pv-line mid" style="width:55%"></div>
+          <div class="pv-line" style="width:75%"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="tab-wa" role="tabpanel">
+      <div>
+        <span class="product-badge">Popular</span>
+        <span class="product-icon" aria-hidden="true">💬</span>
+        <h3 class="product-title">WhatsApp Inteligente con IA</h3>
+        <p class="product-desc">Tu asistente virtual disponible 24/7. Atiende clientes, agenda citas y captura datos automáticamente.</p>
+        <ul class="product-features">
+          <li>Respuestas automáticas inteligentes</li>
+          <li>Atención inmediata sin espera</li>
+          <li>Preguntas frecuentes automatizadas</li>
+          <li>Captura de datos de clientes</li>
+          <li>Agendamiento de citas automático</li>
+          <li>Integración con CRM y bases de datos</li>
+        </ul>
+      </div>
+      <div class="product-visual" aria-hidden="true">
+        <div class="pv-lines">
+          <div class="pv-line dark" style="width:60%;align-self:flex-end"></div>
+          <div class="pv-line mid" style="width:75%"></div>
+          <div class="pv-line dark" style="width:50%;align-self:flex-end"></div>
+          <div class="pv-line mid" style="width:85%"></div>
+          <div class="pv-line dark" style="width:55%;align-self:flex-end"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="tab-inv" role="tabpanel">
+      <div>
+        <span class="product-badge">Control total</span>
+        <span class="product-icon" aria-hidden="true">📊</span>
+        <h3 class="product-title">Inventario Digital EPICS</h3>
+        <p class="product-desc">Control total de tus productos desde una sola plataforma. Diseñado específicamente para negocios cubanos.</p>
+        <ul class="product-features">
+          <li>Gestión completa de productos</li>
+          <li>Control de entradas y salidas</li>
+          <li>Alertas de stock bajo</li>
+          <li>Reportes automáticos</li>
+          <li>Historial de movimientos</li>
+          <li>Multiusuario · Acceso desde móvil</li>
+        </ul>
+      </div>
+      <div class="product-visual" aria-hidden="true">
+        <div class="pv-lines">
+          <div class="pv-line dark" style="width:100%"></div>
+          <div style="display:flex;gap:.5rem;width:100%">
+            <div style="flex:1;height:40px;background:var(--off-black);border-radius:6px"></div>
+            <div style="flex:1;height:40px;background:var(--light);border-radius:6px"></div>
+            <div style="flex:1;height:40px;background:var(--light);border-radius:6px"></div>
+          </div>
+          <div class="pv-line" style="width:100%"></div>
+          <div class="pv-line mid" style="width:80%"></div>
+          <div class="pv-line" style="width:60%"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="tab-sys" role="tabpanel">
+      <div>
+        <span class="product-badge">Empresarial</span>
+        <span class="product-icon" aria-hidden="true">🏢</span>
+        <h3 class="product-title">Sistema para MIPYMES y TCP</h3>
+        <p class="product-desc">Administra toda tu empresa desde una sola plataforma. Clientes, ventas, inventario y estadísticas en tiempo real.</p>
+        <ul class="product-features">
+          <li>Gestión completa de clientes</li>
+          <li>Inventario integrado</li>
+          <li>Ventas y facturación</li>
+          <li>Estadísticas en tiempo real</li>
+          <li>Gestión de empleados</li>
+          <li>Reduce errores · Aumenta productividad</li>
+        </ul>
+      </div>
+      <div class="product-visual" aria-hidden="true">
+        <div class="pv-lines">
+          <div class="pv-dots"><div class="pv-dot"></div><div class="pv-dot" style="background:#ccc"></div><div class="pv-dot" style="background:#eee"></div></div>
+          <div style="display:flex;gap:.5rem;width:100%">
+            <div style="flex:2;background:var(--off-black);border-radius:8px;padding:.75rem"><div style="height:4px;background:rgba(255,255,255,.2);border-radius:4px;margin-bottom:.5rem"></div><div style="height:4px;background:rgba(255,255,255,.1);border-radius:4px"></div></div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:.5rem"><div style="height:40%;background:var(--light);border-radius:8px"></div><div style="height:55%;background:var(--light);border-radius:8px"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="tab-web" role="tabpanel">
+      <div>
+        <span class="product-badge">Diseño</span>
+        <span class="product-icon" aria-hidden="true">🌐</span>
+        <h3 class="product-title">Desarrollo Web Profesional</h3>
+        <p class="product-desc">Sitios modernos, rápidos y optimizados que convierten visitantes en clientes. Tu presencia digital de primer nivel.</p>
+        <ul class="product-features">
+          <li>Landing Pages y sitios corporativos</li>
+          <li>Tiendas online y catálogos digitales</li>
+          <li>Sistemas web personalizados</li>
+          <li>Optimización SEO</li>
+          <li>Diseño responsive · Carga rápida</li>
+          <li>Más credibilidad · Más clientes</li>
+        </ul>
+      </div>
+      <div class="product-visual" aria-hidden="true">
+        <div class="pv-lines">
+          <div style="width:100%;height:24px;background:var(--off-black);border-radius:6px;display:flex;align-items:center;padding:0 .75rem;gap:.5rem"><div style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.3)"></div><div style="flex:1;height:4px;background:rgba(255,255,255,.15);border-radius:4px"></div></div>
+          <div class="pv-line dark" style="width:55%;height:60px;border-radius:10px"></div>
+          <div class="pv-line" style="width:100%"></div>
+          <div class="pv-line mid" style="width:70%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROCESS ===== -->
+<section id="proceso" class="section">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:5rem">
+      <span class="label">Cómo trabajamos</span>
+      <h2 class="section-title reveal">Un proceso simple<br>y efectivo</h2>
+    </div>
+    <div class="process-steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <h3 class="step-title">Analizamos tu negocio</h3>
+        <p class="step-desc">Estudiamos tus procesos actuales y detectamos las principales oportunidades de mejora y automatización.</p>
+      </div>
+      <div class="step reveal d1">
+        <div class="step-num">02</div>
+        <h3 class="step-title">Diseñamos la solución</h3>
+        <p class="step-desc">Creamos una estrategia tecnológica completamente adaptada a tus necesidades y al contexto cubano.</p>
+      </div>
+      <div class="step reveal d2">
+        <div class="step-num">03</div>
+        <h3 class="step-title">Implementamos</h3>
+        <p class="step-desc">Configuramos todas las herramientas, integramos los sistemas y entrenamos a tu equipo para usarlos.</p>
+      </div>
+      <div class="step reveal d3">
+        <div class="step-num">04</div>
+        <h3 class="step-title">Acompañamos</h3>
+        <p class="step-desc">Brindamos soporte continuo, monitoreo y optimizaciones para maximizar tus resultados a largo plazo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTORS ===== -->
+<section id="sectores" class="section">
+  <div class="container">
+    <div class="section-header" style="text-align:center;max-width:540px;margin-left:auto;margin-right:auto;margin-bottom:3rem">
+      <span class="label">Sectores</span>
+      <h2 class="section-title reveal">Soluciones para<br>cualquier sector</h2>
+    </div>
+    <div class="sectors-grid">
+      <div class="sector-item reveal"><span class="sector-emoji" aria-hidden="true">🏪</span><span class="sector-name">Comercios</span></div>
+      <div class="sector-item reveal d1"><span class="sector-emoji" aria-hidden="true">🍽️</span><span class="sector-name">Restaurantes</span></div>
+      <div class="sector-item reveal d2"><span class="sector-emoji" aria-hidden="true">🏥</span><span class="sector-name">Clínicas</span></div>
+      <div class="sector-item reveal d1"><span class="sector-emoji" aria-hidden="true">🎓</span><span class="sector-name">Academias</span></div>
+      <div class="sector-item reveal d2"><span class="sector-emoji" aria-hidden="true">🏗️</span><span class="sector-name">Constructoras</span></div>
+      <div class="sector-item reveal d3"><span class="sector-emoji" aria-hidden="true">🚚</span><span class="sector-name">Distribuidores</span></div>
+      <div class="sector-item reveal d2"><span class="sector-emoji" aria-hidden="true">🏢</span><span class="sector-name">MIPYMES</span></div>
+      <div class="sector-item reveal d3"><span class="sector-emoji" aria-hidden="true">💼</span><span class="sector-name">TCP</span></div>
+      <div class="sector-item reveal d4"><span class="sector-emoji" aria-hidden="true">🛒</span><span class="sector-name">E-commerce</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="nosotros" class="section" style="background:var(--lighter)">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <span class="label" style="display:block;margin-bottom:1rem">Sobre EPICS AI</span>
+        <h2 class="section-title reveal" style="margin-bottom:1.5rem">Tecnología,<br>innovación<br>y resultados</h2>
+        <p class="about-desc reveal">EPICS AI es una agencia especializada en Inteligencia Artificial, automatización empresarial y transformación digital. Ayudamos a organizaciones cubanas a optimizar procesos, aumentar ventas, mejorar la atención al cliente y tomar decisiones basadas en datos mediante herramientas modernas de IA.</p>
+        <div class="about-callouts">
+          <div class="callout reveal">
+            <div class="callout-title">Misión</div>
+            <div class="callout-text">Ayudar a empresas, emprendedores y MIPYMES cubanas a aprovechar el poder de la IA para crecer, competir y prosperar en la nueva economía digital.</div>
+          </div>
+          <div class="callout reveal d1">
+            <div class="callout-title">Visión</div>
+            <div class="callout-text">Convertirnos en la agencia líder de soluciones de Inteligencia Artificial para Cuba y Latinoamérica, impulsando la transformación digital de miles de negocios.</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-visual">
+        <div class="about-art reveal">
+          <div class="about-art-bg" aria-hidden="true"></div>
+          <div class="about-art-text" aria-hidden="true">AI</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CEO ===== -->
+<section id="ceo" class="section">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:3rem">
+      <span class="label">Liderazgo</span>
+    </div>
+    <div class="ceo-card reveal">
+      <div class="ceo-header">
+        <div class="ceo-avatar" aria-label="Iniciales EV">EV</div>
+        <div>
+          <div class="ceo-name">Emanuel Villa López</div>
+          <div class="ceo-role">Especialista en IA · Automatización empresarial · Desarrollo digital</div>
+        </div>
+      </div>
+      <p class="ceo-bio">Más de 3 años de experiencia trabajando con herramientas de IA, automatización comercial y transformación digital. Ha colaborado con clientes de Cuba, México, Estados Unidos, Francia, Suiza y Dubái en proyectos de marketing digital, desarrollo de software, diseño, automatización y generación de contenido asistido por IA. Su enfoque combina tecnología, creatividad y visión estratégica para crear herramientas que generan resultados reales.</p>
+      <div class="ceo-certs">
+        <span class="cert-tag">Google AI Essentials</span>
+        <span class="cert-tag">La Tribu Divisual 2026</span>
+        <span class="cert-tag">Automatización de negocios</span>
+        <span class="cert-tag">Soluciones digitales empresariales</span>
+      </div>
+      <p class="ceo-skills">Desarrollo Web · Automatización · Inteligencia Artificial · Diseño Gráfico · Edición de Video · Modelado 3D · Marketing Digital · Sistemas SaaS · WhatsApp & Facebook Automation</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section id="testimonios" class="section" style="background:var(--lighter)">
+  <div class="container">
+    <div class="section-header">
+      <span class="label">Testimonios</span>
+      <h2 class="section-title reveal">Lo que dicen<br>nuestros clientes</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="stars" aria-label="5 estrellas">★★★★★</div>
+        <p class="testimonial-quote">"Antes perdíamos muchas oportunidades por no responder a tiempo. Con las automatizaciones de EPICS AI logramos atender a todos nuestros clientes y aumentar significativamente nuestras ventas."</p>
+        <div>
+          <div class="author-name">Carlos Rodríguez</div>
+          <div class="author-role">Director Comercial</div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal d1">
+        <div class="stars" aria-label="5 estrellas">★★★★★</div>
+        <p class="testimonial-quote">"El sistema de inventario nos permitió tener control total del negocio. Ahora sabemos exactamente qué tenemos y qué necesitamos comprar. La diferencia es enorme."</p>
+        <div>
+          <div class="author-name">Yanelis Fernández</div>
+          <div class="author-role">Propietaria de MIPYME</div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal d2">
+        <div class="stars" aria-label="5 estrellas">★★★★★</div>
+        <p class="testimonial-quote">"Nos desarrollaron una web profesional y automatizaron nuestro WhatsApp. La diferencia en imagen y organización fue inmediata. Los clientes nos perciben de otra manera."</p>
+        <div>
+          <div class="author-name">Roberto Hernández</div>
+          <div class="author-role">Empresario</div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal d3">
+        <div class="stars" aria-label="5 estrellas">★★★★★</div>
+        <p class="testimonial-quote">"FB Publisher se convirtió en nuestra principal fuente de clientes. El retorno de inversión fue muy rápido. Ahora captamos clientes mientras nos enfocamos en el negocio."</p>
+        <div>
+          <div class="author-name">Laura Pérez</div>
+          <div class="author-role">Administradora</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA FINAL ===== -->
+<section id="cta-final">
+  <div class="container">
+    <span class="label cta-label">El siguiente paso</span>
+    <h2 class="section-title cta-title">El futuro de tu negocio<br>comienza hoy</h2>
+    <p class="cta-sub">No pierdas clientes por procesos manuales. No pierdas tiempo en tareas repetitivas. Digitaliza tu empresa con EPICS AI.</p>
+    <p class="cta-call">Solicita una demostración gratuita y descubre cómo la Inteligencia Artificial puede ayudarte a crecer.</p>
+    <div class="cta-buttons">
+      <a href="https://wa.me/53000000000" class="btn btn-white" target="_blank" rel="noopener noreferrer">📱 Hablar por WhatsApp</a>
+      <a href="mailto:info@epicsai.cu" class="btn btn-white-outline">📧 Enviar Correo</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <span class="footer-logo">EPICS AI</span>
+      <span class="footer-tag">Tecnología Inteligente para Empresas Inteligentes</span>
+      <span class="footer-copy">© 2026 EPICS AI</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  function safe(fn, name) {
+    try { fn(); } catch (e) { console.warn("[" + name + "]", e); }
+  }
+
+  /* ===== HERO CANVAS ===== */
+  function initCanvas() {
+    var canvas = document.getElementById("hero-canvas");
+    if (!canvas) return;
+    var ctx = canvas.getContext("2d");
+    var W, H, pts;
+    var N = 55, MAX = 130;
+
+    function resize() {
+      W = canvas.width = canvas.offsetWidth;
+      H = canvas.height = canvas.offsetHeight;
+    }
+
+    function spawn() {
+      pts = [];
+      for (var i = 0; i < N; i++) {
+        pts.push({
+          x: Math.random() * W, y: Math.random() * H,
+          vx: (Math.random() - .5) * .35,
+          vy: (Math.random() - .5) * .35,
+          r: Math.random() * 1.8 + 1
+        });
+      }
+    }
+
+    function frame() {
+      ctx.clearRect(0, 0, W, H);
+      for (var i = 0; i < pts.length; i++) {
+        var p = pts[i];
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < -10) p.x = W + 10;
+        if (p.x > W + 10) p.x = -10;
+        if (p.y < -10) p.y = H + 10;
+        if (p.y > H + 10) p.y = -10;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(0,0,0,.15)";
+        ctx.fill();
+        for (var j = i + 1; j < pts.length; j++) {
+          var q = pts[j];
+          var dx = p.x - q.x, dy = p.y - q.y;
+          var d = Math.sqrt(dx * dx + dy * dy);
+          if (d < MAX) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y);
+            ctx.strokeStyle = "rgba(0,0,0," + ((1 - d / MAX) * .09) + ")";
+            ctx.lineWidth = .7;
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(frame);
+    }
+
+    resize(); spawn(); frame();
+    window.addEventListener("resize", function () { resize(); spawn(); }, { passive: true });
+  }
+
+  /* ===== CHECKLIST ===== */
+  function initChecklist() {
+    var items = document.querySelectorAll(".hero-checklist li");
+    items.forEach(function (li, i) {
+      setTimeout(function () { li.classList.add("show"); }, 700 + i * 160);
+    });
+  }
+
+  /* ===== NAV ===== */
+  function initNav() {
+    var nav = document.getElementById("nav");
+    var ham = document.querySelector(".nav-hamburger");
+    var mob = document.querySelector(".nav-mobile");
+
+    window.addEventListener("scroll", function () {
+      nav.classList.toggle("scrolled", window.scrollY > 20);
+    }, { passive: true });
+
+    if (ham && mob) {
+      ham.addEventListener("click", function () {
+        var open = mob.classList.toggle("open");
+        ham.classList.toggle("open", open);
+        ham.setAttribute("aria-expanded", open);
+      });
+      mob.querySelectorAll("a").forEach(function (a) {
+        a.addEventListener("click", function () {
+          mob.classList.remove("open");
+          ham.classList.remove("open");
+          ham.setAttribute("aria-expanded", "false");
+        });
+      });
+    }
+
+    // Active link
+    var sections = document.querySelectorAll("section[id]");
+    var links = document.querySelectorAll(".nav-links a");
+    var linkObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          var id = e.target.getAttribute("id");
+          links.forEach(function (a) {
+            a.classList.toggle("active", a.getAttribute("href") === "#" + id);
+          });
+        }
+      });
+    }, { threshold: .35 });
+    sections.forEach(function (s) { linkObs.observe(s); });
+  }
+
+  /* ===== SMOOTH SCROLL ===== */
+  function initScroll() {
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest('a[href^="#"]');
+      if (!a) return;
+      var id = a.getAttribute("href");
+      if (!id || id === "#") return;
+      var el = document.querySelector(id);
+      if (!el) return;
+      e.preventDefault();
+      window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: "smooth" });
+    });
+  }
+
+  /* ===== REVEALS ===== */
+  function initReveals() {
+    var els = document.querySelectorAll(".reveal");
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add("in"); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.04, rootMargin: "0px 0px -2% 0px" });
+    els.forEach(function (el) { obs.observe(el); });
+    setTimeout(function () {
+      document.querySelectorAll(".reveal:not(.in)").forEach(function (el) {
+        if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add("in");
+      });
+    }, 6000);
+  }
+
+  /* ===== COUNT UP ===== */
+  function initCountUp() {
+    var els = document.querySelectorAll("[data-count]");
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var el = e.target;
+        var target = parseInt(el.getAttribute("data-count"), 10);
+        var prefix = el.getAttribute("data-prefix") || "";
+        var suffix = el.getAttribute("data-suffix") || "";
+        var dur = 1200, start = performance.now();
+        function tick(now) {
+          var p = Math.min((now - start) / dur, 1);
+          var val = Math.round((1 - Math.pow(1 - p, 3)) * target);
+          el.textContent = prefix + val + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        obs.unobserve(el);
+      });
+    }, { threshold: .2 });
+    els.forEach(function (el) { obs.observe(el); });
+  }
+
+  /* ===== TABS ===== */
+  function initTabs() {
+    var btns = document.querySelectorAll(".tab-btn");
+    var panels = document.querySelectorAll(".tab-panel");
+    btns.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var id = "tab-" + btn.getAttribute("data-tab");
+        btns.forEach(function (b) { b.classList.remove("active"); b.setAttribute("aria-selected", "false"); });
+        panels.forEach(function (p) { p.classList.remove("active"); });
+        btn.classList.add("active"); btn.setAttribute("aria-selected", "true");
+        var p = document.getElementById(id);
+        if (p) p.classList.add("active");
+      });
+    });
+  }
+
+  /* ===== BOOT ===== */
+  function boot() {
+    safe(initCanvas,    "canvas");
+    safe(initChecklist, "checklist");
+    safe(initNav,       "nav");
+    safe(initScroll,    "scroll");
+    safe(initReveals,   "reveals");
+    safe(initCountUp,   "countUp");
+    safe(initTabs,      "tabs");
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot);
+  } else {
+    boot();
+  }
+
+})();
+</script>
+</body>
+</html>

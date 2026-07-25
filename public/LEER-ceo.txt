@@ -1,0 +1,10 @@
+FOTO DEL CEO
+============
+
+La página de inicio (sección "Liderazgo") muestra la foto de Emanuel Villa López.
+
+1. Coloca la foto en esta carpeta (public/) con el nombre EXACTO:  ceo.png
+2. Recomendado: cuadrada, mínimo 400x400 px, fondo limpio (se recorta en círculo).
+
+Si no colocas la foto, la web muestra automáticamente un círculo con las
+iniciales "EV". No se rompe nada.

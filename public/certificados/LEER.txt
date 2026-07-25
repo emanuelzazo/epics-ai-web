@@ -1,0 +1,27 @@
+FOTOS DE CERTIFICADOS / DIPLOMAS — Página del fundador (/fundador)
+=================================================================
+
+En la página del fundador, cada certificación tiene un botón "Ver en detalle"
+que abre una ventana con la foto del certificado. Coloca aquí cada archivo con
+EXACTAMENTE estos nombres y aparecerá automáticamente. Si falta, se muestra un
+recuadro que dice "Aquí irá la foto del certificado".
+
+ARCHIVO                            CERTIFICACIÓN
+---------------------------------  --------------------------------------------
+google-ai-essentials.jpg           Google AI Essentials (Google)
+claude-certified-architect.jpg     Claude Certified Architect (Anthropic)
+github-foundations.jpg             GitHub Foundations (GitHub)
+hubspot-marketing.jpg              Diploma en Marketing Digital (HubSpot)
+ibm-ciberseguridad.jpg             Analista de Ciberseguridad (IBM SkillsBuild)
+ibm-data-analytics.jpg             Análisis de Datos (IBM SkillsBuild)
+google-cloud-developer.jpg         Google Cloud Developer (Google Cloud)
+apple-developer.jpg                Apple Developer Program (Apple)
+tribu-divisual.jpg                 La Tribu Divisual 2026 (n8n / Claude Code)
+automatizacion-negocios.jpg        Automatización de negocios
+soluciones-digitales.jpg           Soluciones digitales empresariales
+
+Formato: puedes usar .jpg, .png o .pdf-exportado-a-imagen. Si usas otra
+extensión (p. ej. .png), actualiza la ruta "img" de esa certificación en
+app/fundador/page.tsx (array CERTIFICATIONS).
+
+Recomendado: imagen horizontal del diploma, mínimo 1200 px de ancho.

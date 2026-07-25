@@ -1,0 +1,20 @@
+IMÁGENES DE: Sistema para MIPYMES y TCP
+=======================================
+
+Coloca aquí los archivos con EXACTAMENTE estos nombres. Luego, en
+app/servicios/sistema-mipymes/page.tsx, quita el "// " de la línea imgSrc
+correspondiente para activarla.
+
+ARCHIVO              SECCIÓN       QUÉ MOSTRAR
+-------------------  ------------  -------------------------------------------
+hero.gif             Hero          Dashboard principal del sistema
+problema.png         El problema   Información dispersa vs. centralizada
+solucion.gif         La solución   Módulos del sistema en acción
+beneficio-1.png      Beneficio 1   Estadísticas en tiempo real
+beneficio-2.png      Beneficio 2   Gestión de equipo y roles
+autoridad.jpg        Autoridad     El sistema en un negocio real
+
+Formatos: .gif / .png / .jpg. Respeta el nombre base.
+Tamaño recomendado: 1600x900 px (hero) y 1200x900 px (resto).
+
+Si no colocas la imagen, la web muestra un recuadro con la etiqueta. No se rompe nada.

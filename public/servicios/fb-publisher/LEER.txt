@@ -1,0 +1,20 @@
+IMÁGENES DE: FB Publisher
+=========================
+
+Coloca aquí los archivos con EXACTAMENTE estos nombres. Luego, en
+app/servicios/fb-publisher/page.tsx, quita el "// " de la línea imgSrc
+correspondiente para activarla.
+
+ARCHIVO              SECCIÓN      QUÉ MOSTRAR
+-------------------  -----------  --------------------------------------------
+hero.gif             Hero         Vista general de FB Publisher
+problema.png         El problema  Publicación manual vs. automatizada
+solucion.gif         La solución  Panel principal de FB Publisher
+autoridad.jpg        Para quién   Ejemplo de publicaciones programadas
+
+Formatos: .gif (animación), .png (captura con transparencia), .jpg (foto).
+Puedes usar cualquiera de los tres; solo respeta el nombre base (hero, problema, etc.).
+Tamaño recomendado: 1600x900 px (hero) y 1200x900 px (resto).
+
+Si no colocas la imagen, la web muestra automáticamente un recuadro con la
+etiqueta del texto. No se rompe nada.
